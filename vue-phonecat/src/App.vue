@@ -18,8 +18,8 @@
   </header>
 
   <RouterView />-->
-  <p>Nothing here {{ 'yet' + '!' }}</p>
-  <p>Simple calculations: 1 + 2 = {{ 1 + 2 }}</p>
+  <p class="text-center">Nothing here {{ 'yet' + '!' }}</p>
+  <p class="text-center">Simple calculations: 1 + 2 = {{ 1 + 2 }}</p>
 </template>
 
 <style>
