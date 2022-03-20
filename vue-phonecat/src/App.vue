@@ -1,25 +1,15 @@
 <script>
-import json from "@/assets/phones/phones.json";
+import PhoneList from '@/components/PhoneList.vue';
 
 export default {
-  name: "App",
-  data() {
-    return {
-      phones: json
-    }
-  }
+  components: {
+    PhoneList
+  },
 }
 </script>
 
 <template>
-  <ul>
-    <li v-for="phone in phones" :key="phone.id">
-      <span>{{ phone.name }}</span>
-      <p>{{ phone.snippet }}</p>
-    </li>
-  </ul>
-
-  <p>Total number of phones: {{ phones.length }}</p>
+  <PhoneList />
 </template>
 
 <style>
