@@ -1,35 +1,25 @@
-<script setup>
-// import { RouterLink, RouterView } from 'vue-router'
-// import HelloWorld from '@/components/HelloWorld.vue'
+<script>
+import json from "@/assets/phones/phones.json";
+
+export default {
+  name: "App",
+  data() {
+    return {
+      phones: json
+    }
+  }
+}
 </script>
 
 <template>
-  <!-- <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />-->
   <ul>
-    <li>
-      <span>Nexus S</span>
-      <p>Fast just got faster with Nexus S.</p>
-    </li>
-    <li>
-      <span>Motorola XOOM™ with Wi-Fi</span>
-      <p>The Next, Next Generation tablet.</p>
+    <li v-for="phone in phones" :key="phone.id">
+      <span>{{ phone.name }}</span>
+      <p>{{ phone.snippet }}</p>
     </li>
   </ul>
 
-  <p>Total number of phones: 2</p>
+  <p>Total number of phones: {{ phones.length }}</p>
 </template>
 
 <style>
