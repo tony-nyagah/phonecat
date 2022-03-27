@@ -9,6 +9,7 @@ export default {
             searchQuery: "",
             orderChoices: ["Name", "Newest"],
             selectedSortChoice: "Newest",
+            imagepath: "../assets/",
         }
     },
     methods: {
@@ -28,7 +29,7 @@ export default {
             }
             else if (this.selectedSortChoice === "Newest") {
                 unsortedPhones.sort((a, b) => {
-                    return b.age > a.age;
+                    return a.age > b.age;
                 })
             }
             let sortedPhones = unsortedPhones;
@@ -62,10 +63,16 @@ export default {
                 </p>
             </div>
             <div class="col-md-10">
-                <ul class="phones">
-                    <!-- filteredPhones is a function that checks to see if what is in searchQuery is in any of the phone names -->
-                    <li v-for="phone in filteredAndSortedPhones" :key="phone.id">
-                        <span>{{ phone.name }}</span>
+                <ul class="phones list-group">
+                    <li v-for="phone in filteredAndSortedPhones" class="phone-desc list-group-item">
+                        <a :href="phone.id" class="thumb">
+                            <img
+                                :src="'src/assets/' + phone.imageUrl"
+                                :alt="phone.name"
+                                class="img-thumbnail"
+                            />
+                        </a>
+                        <a :href="phone.id">{{ phone.name }}</a>
                         <p>{{ phone.snippet }}</p>
                     </li>
                 </ul>
@@ -74,3 +81,4 @@ export default {
         </div>
     </div>
 </template>
+
