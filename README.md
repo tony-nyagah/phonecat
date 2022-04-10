@@ -9,3 +9,5 @@ Link to said AngularJS tutorial: https://docs.angularjs.org/tutorial.
 Link to the AngularJS phonecat GitHub: https://github.com/angular/angular-phonecat.
 
 The final product is supposed to look like what's in the link: https://angular.github.io/angular-phonecat/step-14/app/#!/phones.
+
+Vue version link: https://vue-phonecat.vercel.app
