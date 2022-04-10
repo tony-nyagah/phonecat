@@ -9,7 +9,6 @@
         searchQuery: "",
         orderChoices: ["Name", "Newest"],
         selectedSortChoice: "Newest",
-        imagepath: "../assets/",
       };
     },
     methods: {
@@ -90,7 +89,7 @@
               class="thumb"
             >
               <img
-                :src="'/src/assets/' + phone.imageUrl"
+                :src="'/public/' + phone.imageUrl"
                 :alt="phone.name"
                 class="img-thumbnail"
               />
