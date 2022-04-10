@@ -1,16 +1,9 @@
 <script>
-import PhoneList from '@/components/PhoneList.vue';
-
-export default {
-  components: {
-    PhoneList
-  },
-}
+  export default {
+    name: "App",
+  };
 </script>
 
 <template>
-  <PhoneList />
+  <router-view />
 </template>
-
-<style>
-</style>

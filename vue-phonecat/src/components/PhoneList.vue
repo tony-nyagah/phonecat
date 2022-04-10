@@ -81,25 +81,29 @@
             v-for="phone in filteredAndSortedPhones"
             class="phone-desc list-group-item"
           >
-            <!-- <a :href="phone.id" class="thumb">
+            <router-link
+              :to="{
+                name: 'PhoneDetails',
+                params: { phone_name: phone.name },
+              }"
+              :key="phone.name"
+              class="thumb"
+            >
               <img
                 :src="'src/assets/' + phone.imageUrl"
                 :alt="phone.name"
                 class="img-thumbnail"
               />
-            </a> -->
-            <router-link
-              :to="{
-                name: 'phone-details',
-                params: { name: phone.name },
-                props: true,
-              }"
-              v-for="phone in phones"
-              :key="phone.name"
-            >
             </router-link>
 
-            <a :href="phone.id">{{ phone.name }}</a>
+            <router-link
+              :to="{
+                name: 'PhoneDetails',
+                params: { phone_name: phone.name },
+              }"
+              :key="phone.name"
+              >{{ phone.name }}</router-link
+            >
             <p>{{ phone.snippet }}</p>
           </li>
         </ul>

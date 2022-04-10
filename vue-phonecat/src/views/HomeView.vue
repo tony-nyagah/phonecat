@@ -1,9 +1,13 @@
-<script setup>
-import TheWelcome from '@/components/TheWelcome.vue'
+<script>
+  import PhoneList from "@/components/PhoneList.vue";
+  export default {
+    name: "HomeView",
+    components: { PhoneList },
+  };
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <PhoneList />
   </main>
 </template>
