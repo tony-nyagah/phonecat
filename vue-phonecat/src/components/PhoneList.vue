@@ -89,7 +89,7 @@
               class="thumb"
             >
               <img
-                :src="'/public/' + phone.imageUrl"
+                :src="phone.imageUrl"
                 :alt="phone.name"
                 class="img-thumbnail"
               />
