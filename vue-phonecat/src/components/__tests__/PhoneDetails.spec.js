@@ -10,4 +10,9 @@ describe("Phone details", () => {
     await wrapper.setProps({ phone_id: "iPhone-XS" });
     expect(wrapper.vm.phone_id).toBe("iPhone-XS");
   });
+  // test that the checkmark function returns the correct value
+  it("checkmark should be a tick icon if true and an x if false", async () => {
+    expect(wrapper.vm.checkmark(true)).toBe("\u2713");
+    expect(wrapper.vm.checkmark(false)).toBe("\u2718");
+  });
 });
