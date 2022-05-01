@@ -1,60 +1,60 @@
 <script>
-  import json from "@/assets/phones/phones.json";
+import json from "@/assets/phones/phones.json";
 
-  export default {
-    name: "PhoneList",
-    data() {
-      return {
-        phones: json,
-        searchQuery: "",
-        orderChoices: ["Name", "Newest"],
-        selectedSortChoice: "Newest",
-      };
+export default {
+  name: "PhoneList",
+  data() {
+    return {
+      phones: json,
+      searchQuery: "",
+      orderChoices: ["Name", "Newest"],
+      selectedSortChoice: "Newest",
+    };
+  },
+  methods: {
+    filteredPhones() {
+      let filteredPhones = this.phones.filter((phone) => {
+        return phone.name
+          .toLowerCase()
+          .includes(this.searchQuery.toLowerCase());
+      });
+      return filteredPhones;
     },
-    methods: {
-      filteredPhones() {
-        let filteredPhones = this.phones.filter((phone) => {
-          return phone.name
-            .toLowerCase()
-            .includes(this.searchQuery.toLowerCase());
+
+    sortedPhones() {
+      let unsortedPhones = this.filteredPhones();
+      if (this.selectedSortChoice === "Name") {
+        unsortedPhones.sort((a, b) => {
+          if (a.name.toLowerCase() > b.name.toLowerCase()) {
+            return 1;
+          }
+          if (a.name.toLowerCase() < b.name.toLowerCase()) {
+            return -1;
+          }
+          return 0;
         });
-        return filteredPhones;
-      },
-
-      sortedPhones() {
-        let unsortedPhones = this.filteredPhones();
-        if (this.selectedSortChoice === "Name") {
-          unsortedPhones.sort((a, b) => {
-            if (a.name.toLowerCase() > b.name.toLowerCase()) {
-              return 1;
-            }
-            if (a.name.toLowerCase() < b.name.toLowerCase()) {
-              return -1;
-            }
-            return 0;
-          });
-        }
-        if (this.selectedSortChoice === "Newest") {
-          unsortedPhones.sort((a, b) => {
-            if (a.age > b.age) {
-              return 1;
-            }
-            if (a.age < b.age) {
-              return -1;
-            }
-            return 0;
-          });
-        }
-        let sortedPhones = unsortedPhones;
-        return sortedPhones;
-      },
+      }
+      if (this.selectedSortChoice === "Newest") {
+        unsortedPhones.sort((a, b) => {
+          if (a.age > b.age) {
+            return 1;
+          }
+          if (a.age < b.age) {
+            return -1;
+          }
+          return 0;
+        });
+      }
+      let sortedPhones = unsortedPhones;
+      return sortedPhones;
     },
-    computed: {
-      filteredAndSortedPhones() {
-        return this.sortedPhones();
-      },
+  },
+  computed: {
+    filteredAndSortedPhones() {
+      return this.sortedPhones();
     },
-  };
+  },
+};
 </script>
 
 <template>
@@ -76,33 +76,18 @@
       </div>
       <div class="col-lg-8">
         <ul class="phones list-group">
-          <li
-            v-for="phone in filteredAndSortedPhones"
-            class="phone-desc list-group-item"
-          >
-            <router-link
-              :to="{
-                name: 'phone_details',
-                params: { phone_name: phone.name },
-              }"
-              :key="phone.name"
-              class="thumb"
-            >
-              <img
-                :src="phone.imageUrl"
-                :alt="phone.name"
-                class="img-thumbnail"
-              />
+          <li v-for="phone in filteredAndSortedPhones" class="phone-desc list-group-item">
+            <router-link :to="{
+              name: 'phone_details',
+              params: { phone_id: phone.id },
+            }" :key="phone.name" class="thumb">
+              <img :src="phone.imageUrl" :alt="phone.name" class="img-thumbnail" />
             </router-link>
 
-            <router-link
-              :to="{
-                name: 'phone_details',
-                params: { phone_name: phone.name },
-              }"
-              :key="phone.name"
-              >{{ phone.name }}</router-link
-            >
+            <router-link :to="{
+              name: 'phone_details',
+              params: { phone_id: phone.id },
+            }" :key="phone.name">{{ phone.name }}</router-link>
             <p>{{ phone.snippet }}</p>
           </li>
         </ul>
