@@ -1,12 +1,14 @@
 <script>
   export default {
     name: "PhoneDetails",
+    props: {
+      phone_name: { String },
+    },
   };
 </script>
 
 <template>
   <p>
-    TBD: Detail view for <span>{{ $route.params.phone_name }}</span>
+    TBD: Detail view for <span>{{ phone_name }}.</span>
   </p>
-  <router-view></router-view>
 </template>

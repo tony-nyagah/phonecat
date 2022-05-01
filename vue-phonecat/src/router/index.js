@@ -11,9 +11,10 @@ const router = createRouter({
         },
         {
             path: "/PhoneDetails/:phone_name",
-            name: "PhoneDetails",
+            name: "phone_details",
             component: () =>
-                import ("../views/PhoneDetailsView.vue"),
+                import ("../components/PhoneDetails.vue"),
+            props: true,
         },
     ],
 });

@@ -82,7 +82,7 @@
           >
             <router-link
               :to="{
-                name: 'PhoneDetails',
+                name: 'phone_details',
                 params: { phone_name: phone.name },
               }"
               :key="phone.name"
@@ -97,7 +97,7 @@
 
             <router-link
               :to="{
-                name: 'PhoneDetails',
+                name: 'phone_details',
                 params: { phone_name: phone.name },
               }"
               :key="phone.name"
