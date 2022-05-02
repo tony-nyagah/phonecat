@@ -12,7 +12,7 @@ describe("Phone details", () => {
   });
   // test that the checkmark function returns the correct value
   it("checkmark should be a tick icon if true and an x if false", async () => {
-    expect(wrapper.vm.checkmark(true)).toBe("\u2713");
-    expect(wrapper.vm.checkmark(false)).toBe("\u2718");
+    expect(wrapper.vm.checkMark(true)).toBe("\u2713");
+    expect(wrapper.vm.checkMark(false)).toBe("\u2718");
   });
 });

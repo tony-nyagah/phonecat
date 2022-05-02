@@ -13,14 +13,32 @@ export default {
   },
   data() {
     return {
-      phone_data: null,
+      phone: {
+        "additionalFeatures": "", "android": { "os": "", "ui": "" }, "availability": [""],
+        "battery": { "standbyTime": "", "talkTime": "", "type": "" }, "camera": {
+          "features": [""],
+          "primary": ""
+        }, "connectivity": {
+          "bluetooth": "", "cell": "", "gps": true, "infrared": false,
+          "wifi": ""
+        }, "description": "", "display": {
+          "screenResolution": "", "screenSize": "",
+          "touchScreen": true
+        }, "hardware": {
+          "accelerometer": true, "audioJack": "", "cpu": "",
+          "fmRadio": false, "physicalKeyboard": false, "usb": ""
+        }, "id": "", "images": [""], "name": "",
+        "sizeAndWeight": { "dimensions": ["", "", ""], "weight": "" }, "storage": { "flash": "", "ram": "" }
+      },
+      mainImageUrl: '',
     };
   },
   created() {
     // fetch(`/src/assets/phones/${this.phone_id}.json`).then((response) => response.json()
-    //   .then((data) => (this.phone_data = data)));
+    //   .then((data) => (this.phone = data)));
     axios.get(`/src/assets/phones/${this.phone_id}.json`).then((response) => {
-      this.phone_data = response.data;
+      this.phone = response.data;
+      console.log(this.phone);
     });
 
   },
@@ -33,15 +51,15 @@ export default {
 </script>
 
 <template>
-  <img v-if="phone_data.images" :src="'../' + phone_data.images[0]" :alt="phone_data.name" class="phone" />
+  <img v-if="phone.images" :src="'../' + phone.images[0]" :alt="phone.name" class="phone" />
 
-  <h1>{{ phone_data.name }}</h1>
+  <h1>{{ phone.name }}</h1>
 
-  <p>{{ phone_data.description }}</p>
+  <p>{{ phone.description }}</p>
 
   <ul class="phone-thumbs">
-    <li v-if="phone_data.images" v-for="img in phone_data.images">
-      <img :src="'../' + img" :alt="phone_data.name">
+    <li v-if="phone.images" v-for="img in phone.images">
+      <img :src="'../' + img" :alt="phone.name">
     </li>
   </ul>
 
@@ -50,7 +68,7 @@ export default {
       <span>Availability and Networks</span>
       <dl>
         <dt>Availability</dt>
-        <dd v-for="availability in phone_data.availability">{{ availability }}</dd>
+        <dd v-for="availability in phone.availability">{{ availability }}</dd>
       </dl>
     </li>
 
@@ -58,11 +76,11 @@ export default {
       <span>Battery</span>
       <dl>
         <dt>Type</dt>
-        <dd>{{ phone_data.battery.type }}</dd>
+        <dd>{{ phone.battery.type }}</dd>
         <dt>Talk Time</dt>
-        <dd>{{ phone_data.battery.talkTime }}</dd>
+        <dd>{{ phone.battery.talkTime }}</dd>
         <dt>Standby time (max)</dt>
-        <dd>{{ phone_data.battery.standbyTime }}</dd>
+        <dd>{{ phone.battery.standbyTime }}</dd>
       </dl>
     </li>
 
@@ -70,9 +88,9 @@ export default {
       <span>Storage and Memory</span>
       <dl>
         <dt>RAM</dt>
-        <dd>{{ phone_data.storage.ram }}</dd>
+        <dd>{{ phone.storage.ram }}</dd>
         <dt>Internal Storage</dt>
-        <dd>{{ phone_data.storage.flash }}</dd>
+        <dd>{{ phone.storage.flash }}</dd>
       </dl>
     </li>
 
@@ -80,15 +98,15 @@ export default {
       <span>Connectivity</span>
       <dl>
         <dt>Network Support</dt>
-        <dd>{{ phone_data.connectivity.cell }}</dd>
+        <dd>{{ phone.connectivity.cell }}</dd>
         <dt>WiFi</dt>
-        <dd>{{ phone_data.connectivity.wifi }}</dd>
+        <dd>{{ phone.connectivity.wifi }}</dd>
         <dt>Bluetooth</dt>
-        <dd>{{ phone_data.connectivity.bluetooth }}</dd>
+        <dd>{{ phone.connectivity.bluetooth }}</dd>
         <dt>Infrared</dt>
-        <dd>{{ checkMark(phone_data.connectivity.infrared) }}</dd>
+        <dd>{{ checkMark(phone.connectivity.infrared) }}</dd>
         <dt>GPS</dt>
-        <dd>{{ checkMark(phone_data.connectivity.gps) }}</dd>
+        <dd>{{ checkMark(phone.connectivity.gps) }}</dd>
       </dl>
     </li>
 
@@ -96,9 +114,9 @@ export default {
       <span>Android</span>
       <dl>
         <dt>OS Version</dt>
-        <dd>{{ phone_data.android.os }}</dd>
+        <dd>{{ phone.android.os }}</dd>
         <dt>UI</dt>
-        <dd>{{ phone_data.android.ui }}</dd>
+        <dd>{{ phone.android.ui }}</dd>
       </dl>
     </li>
 
@@ -106,9 +124,9 @@ export default {
       <span>Size and Weight</span>
       <dl>
         <dt>Dimensions</dt>
-        <dd v-for="dim in phone_data.sizeAndWeight.dimensions">{{ dim }}</dd>
+        <dd v-for="dim in phone.sizeAndWeight.dimensions">{{ dim }}</dd>
         <dt>Weight</dt>
-        <dd>{{ phone_data.sizeAndWeight.weight }}</dd>
+        <dd>{{ phone.sizeAndWeight.weight }}</dd>
       </dl>
     </li>
 
@@ -116,11 +134,11 @@ export default {
       <span>Display</span>
       <dl>
         <dt>Screen size</dt>
-        <dd>{{ phone_data.display.screenSize }}</dd>
+        <dd>{{ phone.display.screenSize }}</dd>
         <dt>Screen resolution</dt>
-        <dd>{{ phone_data.display.screenResolution }}</dd>
+        <dd>{{ phone.display.screenResolution }}</dd>
         <dt>Touch screen</dt>
-        <dd>{{ checkMark(phone_data.display.touchScreen) }}</dd>
+        <dd>{{ checkMark(phone.display.touchScreen) }}</dd>
       </dl>
     </li>
 
@@ -128,15 +146,15 @@ export default {
       <span>Hardware</span>
       <dl>
         <dt>CPU</dt>
-        <dd>{{ phone_data.hardware.cpu }}</dd>
+        <dd>{{ phone.hardware.cpu }}</dd>
         <dt>USB</dt>
-        <dd>{{ phone_data.hardware.usb }}</dd>
+        <dd>{{ phone.hardware.usb }}</dd>
         <dt>Audio / headphone jack</dt>
-        <dd>{{ phone_data.hardware.audioJack }}</dd>
+        <dd>{{ phone.hardware.audioJack }}</dd>
         <dt>FM Radio</dt>
-        <dd>{{ checkMark(phone_data.hardware.fmRadio) }}</dd>
+        <dd>{{ checkMark(phone.hardware.fmRadio) }}</dd>
         <dt>Accelerometer</dt>
-        <dd>{{ checkMark(phone_data.hardware.accelerometer) }}</dd>
+        <dd>{{ checkMark(phone.hardware.accelerometer) }}</dd>
       </dl>
     </li>
 
@@ -144,15 +162,15 @@ export default {
       <span>Camera</span>
       <dl>
         <dt>Primary</dt>
-        <dd>{{ phone_data.camera.primary }}</dd>
+        <dd>{{ phone.camera.primary }}</dd>
         <dt>Features</dt>
-        <dd>{{ phone_data.camera.features.join(', ') }}</dd>
+        <dd>{{ phone.camera.features.join(', ') }}</dd>
       </dl>
     </li>
 
     <li>
       <span>Additional Features</span>
-      <dd>{{ phone_data.additionalFeatures }}</dd>
+      <dd>{{ phone.additionalFeatures }}</dd>
     </li>
   </ul>
 </template>
