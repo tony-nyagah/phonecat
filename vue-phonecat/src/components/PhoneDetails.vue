@@ -61,7 +61,7 @@ export default {
   <p>{{ phone.description }}</p>
 
   <ul class="phone-thumbs">
-    <li v-for="img in phone.images">
+    <li v-for="img in phone.images" :key="img">
       <img :src="'../' + img" :alt="phone.name" @click="setMainImage(img)">
     </li>
   </ul>

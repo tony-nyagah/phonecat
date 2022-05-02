@@ -76,23 +76,46 @@ export default {
       </div>
       <div class="col-lg-8">
         <ul class="phones list-group">
-          <li v-for="phone in filteredAndSortedPhones" class="phone-desc list-group-item">
-            <router-link :to="{
-              name: 'phone_details',
-              params: { phone_id: phone.id },
-            }" :key="phone.name" class="thumb">
-              <img :src="phone.imageUrl" :alt="phone.name" class="img-thumbnail" />
-            </router-link>
+          <TransitionGroup name="listTransition" tag="ul">
+            <li v-for="phone in filteredAndSortedPhones" class="phone-desc list-group-item" :key="phone.id">
+              <router-link :to="{
+                name: 'phone_details',
+                params: { phone_id: phone.id },
+              }" :key="phone.name" class="thumb">
+                <img :src="phone.imageUrl" :alt="phone.name" class="img-thumbnail" />
+              </router-link>
 
-            <router-link :to="{
-              name: 'phone_details',
-              params: { phone_id: phone.id },
-            }" :key="phone.name">{{ phone.name }}</router-link>
-            <p>{{ phone.snippet }}</p>
-          </li>
+              <router-link :to="{
+                name: 'phone_details',
+                params: { phone_id: phone.id },
+              }" :key="phone.name">{{ phone.name }}</router-link>
+              <p>{{ phone.snippet }}</p>
+            </li>
+          </TransitionGroup>
         </ul>
       </div>
       <p>Total number of phones: {{ filteredAndSortedPhones.length }}</p>
     </div>
   </div>
 </template>
+
+<style>
+.listTransition-move,
+/* apply transition to moving elements */
+.listTransition-enter-active,
+.listTransition-leave-active {
+  transition: all 0.5s ease;
+}
+
+.listTransition-enter-from,
+.listTransition-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
+.listTransition-leave-active {
+  position: absolute;
+}
+</style>
