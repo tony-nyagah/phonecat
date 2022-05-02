@@ -34,13 +34,10 @@ export default {
     };
   },
   created() {
-    // fetch(`/src/assets/phones/${this.phone_id}.json`).then((response) => response.json()
-    //   .then((data) => (this.phone = data)));
-    axios.get(`/src/assets/phones/${this.phone_id}.json`).then((response) => {
-      this.phone = response.data;
+    import(`../assets/phones/${this.phone_id}.json`).then((module) => {
+      this.phone = module.default;
       this.mainImageUrl = `../${this.phone.images[0]}`;
     });
-
   },
   methods: {
     checkMark(value) {
