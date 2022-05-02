@@ -15,4 +15,11 @@ describe("Phone details", () => {
     expect(wrapper.vm.checkMark(true)).toBe("\u2713");
     expect(wrapper.vm.checkMark(false)).toBe("\u2718");
   });
+  // test that the setMainImage function changes mainImageUrl to the passed url
+  it("setImageUrl should change mainImageUrl to the passed url", async () => {
+    await wrapper.vm.setMainImage("img/phones/motorola-xoom-with-wi-fi.2.jpg");
+    expect(wrapper.vm.mainImageUrl).toBe(
+      "../img/phones/motorola-xoom-with-wi-fi.2.jpg"
+    );
+  });
 });

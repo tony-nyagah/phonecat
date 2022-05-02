@@ -38,7 +38,7 @@ export default {
     //   .then((data) => (this.phone = data)));
     axios.get(`/src/assets/phones/${this.phone_id}.json`).then((response) => {
       this.phone = response.data;
-      console.log(this.phone);
+      this.mainImageUrl = `../${this.phone.images[0]}`;
     });
 
   },
@@ -46,20 +46,23 @@ export default {
     checkMark(value) {
       return value ? "\u2713" : "\u2718";
     },
+    setMainImage(imageUrl) {
+      this.mainImageUrl = `../${imageUrl}`;
+    },
   }
 };
 </script>
 
 <template>
-  <img v-if="phone.images" :src="'../' + phone.images[0]" :alt="phone.name" class="phone" />
+  <img :src="mainImageUrl" :alt="phone.name" class="phone" />
 
   <h1>{{ phone.name }}</h1>
 
   <p>{{ phone.description }}</p>
 
   <ul class="phone-thumbs">
-    <li v-if="phone.images" v-for="img in phone.images">
-      <img :src="'../' + img" :alt="phone.name">
+    <li v-for="img in phone.images">
+      <img :src="'../' + img" :alt="phone.name" @click="setMainImage(img)">
     </li>
   </ul>
 
